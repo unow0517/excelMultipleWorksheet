@@ -1,0 +1,82 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1 class = 'maintitle'>
+      Data Extraction From Multiple Worksheets in an Excelfile
+    </h1><br>
+    <div class ='explanation'>
+      <p>If you want to extract the value in the certain cells in multiple worksheets in same format</p>
+      <p>Code runs in <b>Python</b>, <b>pandas</b> package should be installed</p>
+    </div><br>
+    <img id= 'multipleSheetsImg' src="image/MultipleSheets1.jpg" alt="multipleSheetsImg">
+    <pre id ='code'>
+      <code>
+        import pandas as pd
+        import os
+        import xlsxwriter
+
+        #EXCEL FILE PATH#
+        path = 'C:/Users/WooY/Desktop/Berichtswesen/2021/Dezember/Landkreis1.xlsx'
+
+        #RECALL THE EXCEL FILE AS A DATAFRAME#
+        data = pd.read_excel(path,sheet_name= None)
+
+        #SET THE NUMBER OF SHEETS#
+        sheetsnum = list(range(0,len(data)))
+
+        #SET THE CELL RANGE YOU NEED IN THE SHEET, IN THIS CASE 13TH ROW and 20,21TH COLUMNS ARE SELECTED.
+        Exl = pd.read_excel(path,
+            sheet_name= sheetsnum, header = 12, usecols=[19,20])
+
+        #SHEET NAME LIST
+        SheetsName = [
+            'Sheet1',
+            'Sheet100,
+            'Sheet100,
+            ...,
+            'Sheet100',
+            'Sum'
+        ]
+
+        #MAKE EMPTY LIST TO STORE THE DERIVED DATA
+        col19=[]
+        col20=[]
+
+        #INSERT DATA INTO THE LISTS
+        for i in sheetsnum:
+            df = pd.DataFrame.from_dict(Exl[i])
+            col19.append(df.iat[0,0])
+            col20.append(df.iat[0,1])
+
+        #SUM OF THE DERIVED DATA IS ADDED(OPTIONAL)
+        col19.append(sum(col19))
+        col20.append(sum(col20))
+
+        #MAKE ARRAY FROM THE LISTS
+        d={
+            'COL19': [0]*(len(sheetsnum)+1),
+            'COL20': [0]*(len(sheetsnum)+1),
+            'SHEET_NAME': ['']*(len(sheetsnum)+1),
+        }
+
+        #THE ARRAY TO DATAFRAME
+        Summary = pd.DataFrame(data=d,index=None)
+        Summary.COL19 = Summary.COL19.add(COL19)
+        Summary.COL20 = Summary.COL20.add(COL20)
+        Anschluss.GEMEINDE = Gemeinde
+
+        ##WRITE EXCEL FILE
+        writer = pd.ExcelWriter('Summary.xlsx', engine = 'xlsxwriter')
+        Summary.to_excel(writer,sheet_name= 'Summary')
+
+
+        ##SAVE AND EXPORT
+        writer.save()
+        print('DONE!')
+      </code>
+    </pre>
+  </body>
+</html>

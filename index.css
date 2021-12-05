@@ -1,0 +1,35 @@
+body{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+/* When size unit is pixel, zoom in or out doesn't mess up the format. */
+
+/* margin applied from upper and lower container, it'd overlap, to avoid add <br> between the elements*/
+h1{
+  margin:  50px auto;
+}
+
+#multipleSheetsImg{
+  width: 800px;
+  margin: 50px auto;
+}
+
+.explanation{
+  font-size: 25px;
+  margin: 50px auto;
+}
+
+pre{
+  display: block;
+  text-align: left;
+  width: 800px;
+  align-items: center;
+}
+
+
+#code{
+  background-color: hsl(210,8%,95%);
+  /* width: 30vw; */
+  margin: 1% auto;
+}
